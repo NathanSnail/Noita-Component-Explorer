@@ -26,6 +26,7 @@ function show_{{ config.name }}_fields(field_name, description, component_id)
     {%- set sections = {
         "Members": config.members,
         "Privates": config.privates,
+        "Objects": config.objects,
         "Custom data types": config.custom_data_types,
     } %}
 
@@ -54,7 +55,7 @@ function show_{{ config.name }}_fields(field_name, description, component_id)
         {% elif field_type in supported_fields %}
         show_field_{{ field_type }}("{{ field.name }}", {{ description }}, component_id, get, set)
         {% else %}
-        -- show_field_{{ field_type }}("{{ field.name }}", {{ description }}, component_id)
+        show_field_unsupported("{{ field.name }}", {{ description }}, component_id, "{{ field.type }}")
         {% endif -%}
 
         {% endfor %}

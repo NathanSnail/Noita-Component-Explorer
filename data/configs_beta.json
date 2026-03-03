@@ -1095,6 +1095,11 @@
                 "type": "int",
                 "name": "explosion_delay_id",
                 "description": "for delayed barrel explosions... this has to be set and has to be the same for the explosions for there to be a delay"
+            },
+            {
+                "type": "bool",
+                "name": "not_scaled_by_gamefx",
+                "description": "If 1, DAMAGE_MULTIPLIER etc don't affect this explosion"
             }
         ],
         "privates": [
