@@ -255,6 +255,12 @@ function main_window()
                 end
                 link.menu_item("Docs", docs_description, version.wiki)
 
+                local hamis_description = "Copies web link"
+                if link.open_link then
+                    hamis_description = "Opens page"
+                end
+                link.menu_item("Hämis", hamis_description, "https://xn--hmis-loa.dextercd.com")
+
                 imgui.EndMenu()
             end
 
