@@ -12,12 +12,14 @@ This makes it easy for users to find your tool in a well known and convenient pl
 
 For the purposes of this guide, we're adding a menu entry for an imaginary mod named 'mymod'.
 
-Inside 'mods/mymod/init.lua' add a line like this:
+Inside 'mods/mymod/init.lua' add code like this:
 
-ModLuaFileAppend(
-    "mods/component-explorer/menu_extensions.lua",
-    "mods/mymod/ce_menu_entry.lua"
-)
+if ModIsEnabled("component-explorer") then
+    ModLuaFileAppend(
+        "mods/component-explorer/menu_extensions.lua",
+        "mods/mymod/ce_menu_entry.lua"
+    )
+end
 
 Note that you don't need to check if Component Explorer is enabled to do the append.
 It'll not have any effect if you run the append when the mod isn't active or installed.
