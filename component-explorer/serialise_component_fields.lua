@@ -10,11 +10,15 @@ end
 
 local simple_field_types = as_set({
     "int", "unsignedint", "int16", "uint16", "int32", "uint32", "int64",
-    "uint64", "float", "double", "bool", "string", "USTRING",
+    "uint64", "float", "double", "bool", "string", "USTRING", "EntityID",
+})
+
+local deprecated_field_types = as_set({
+	"b2ObjectID",
 })
 
 local skip_field_types = as_set({
-    "EntityID", "LuaManager*", "b2Body*", "b2ObjectID",
+    "LuaManager*", "b2Body*",
 })
 
 local int_material_field_names = as_set({
@@ -43,6 +47,8 @@ function add_field(component_id, component, field_type, field_name)
         component.attr[field_name] = CellFactory_GetName(ComponentGetValue2(component_id, field_name))
     elseif simple_field_types[field_type] or string.find(field_type, "_Enum", 1, true) then
         component.attr[field_name] = ComponentGetValue2(component_id, field_name)
+    elseif deprecated_field_types[field_type] then
+        component.attr[field_name] = ComponentGetValue(component_id, field_name)
     elseif string.find(field_type, "LensValue_", 1, true) then
         component.attr[field_name] = ComponentGetMetaCustom(component_id, field_name)
     elseif field_type == "StatusEffectType" then
