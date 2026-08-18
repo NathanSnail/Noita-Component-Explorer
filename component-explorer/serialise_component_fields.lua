@@ -17,9 +17,7 @@ local deprecated_field_types = as_set({
 	"b2ObjectID",
 })
 
-local skip_field_types = as_set({
-    "LuaManager*", "b2Body*",
-})
+local skip_field_types = as_set({})
 
 local int_material_field_names = as_set({
     "material", "material2", "ragdoll_material",
@@ -42,8 +40,14 @@ local simple_object_types = as_set({
     "ConfigDrugFx",
 })
 
+---@param component_id component_id
+---@param component any
+---@param field_type string
+---@param field_name string
 function add_field(component_id, component, field_type, field_name)
     if skip_field_types[field_type] then
+        return
+    elseif field_type:find("*", 1, true) then
         return
     elseif field_type == "int" and int_material_field_names[field_name] then
         component.attr[field_name] = CellFactory_GetName(ComponentGetValue2(component_id, field_name))
