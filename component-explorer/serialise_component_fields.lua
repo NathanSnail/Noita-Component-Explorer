@@ -34,10 +34,12 @@ local int_material_field_names = as_set({
 
 local simple_object_types = as_set({
     "ConfigDamagesByType",
+    "ConfigDamageCritical",
     "ConfigGunActionInfo",
     "ConfigGun",
     "ConfigExplosion",
     "ConfigLaser",
+    "ConfigDrugFx",
 })
 
 function add_field(component_id, component, field_type, field_name)
